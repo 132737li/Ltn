@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ff4f9a" />
+  <meta name="description" content="Un petit message très important pour toi... 💗" />
+  <title>💌 Un petit message pour toi</title>
+
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body class="page page--home">
+
+  <!-- Musique de la page -->
+  <audio id="pageMusic" src="assets/musique1.mp3" loop preload="auto"></audio>
+  <button type="button" class="music-toggle" id="musicToggle" aria-pressed="false"
+    aria-label="Activer la musique">🎵</button>
+
+  <!-- Décor de fond -->
+  <div class="bg-decor" aria-hidden="true">
+    <span class="blob blob--1"></span>
+    <span class="blob blob--2"></span>
+    <span class="blob blob--3"></span>
+  </div>
+
+  <main class="stage">
+    <section class="card" aria-labelledby="main-title">
+
+      <span class="badge">💌 Ltn 🫡🫡🫡</span>
+
+      <h1 class="title" id="main-title">Salut toi ❤️</h1>
+
+      <p class="lead">Je suis venu te parler d'une chose très sérieuse...</p>
+
+      <div class="joke">
+        <p>J'ai longuement réfléchi à la meilleure façon de te parler...</p>
+        <p>J'ai même demandé conseil à mon cerveau.</p>
+        <p class="punchline">Il m'a répondu : « Débrouille-toi. » 😂</p>
+      </div>
+
+      <p class="lead lead--strong">
+        Bon... maintenant que tu as souri, passons aux choses sérieuses. ❤️
+      </p>
+
+      <div class="actions">
+        <a class="btn btn--primary" href="page2.html">Continuer 💗</a>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>❤️ © Léon Corazón Web developper — All rights reserved</p>
+  </footer>
+
+  <div class="page-veil" aria-hidden="true"></div>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>

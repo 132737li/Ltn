@@ -1,0 +1,753 @@
+/* ==========================================================================
+   Mini-site « demande d'excuse » — feuille de style principale
+   Thème : rose / pink 💗
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Variables
+   -------------------------------------------------------------------------- */
+
+:root {
+  --pink: #ff4f9a;
+  --pink-dark: #d81b60;
+  --pink-deep: #b3155c;
+  --pink-light: #ffd6e8;
+  --pink-soft: #fff5f9;
+  --white: #ffffff;
+
+  --text: #2b1b23;
+  --text-soft: #6b4757;
+  --text-muted: #8a5a70;
+
+  --radius-lg: 28px;
+  --radius-md: 20px;
+  --radius-pill: 999px;
+
+  --shadow-card:
+    0 26px 60px -30px rgba(180, 40, 105, 0.55),
+    0 6px 20px -12px rgba(180, 40, 105, 0.22);
+  --shadow-btn: 0 14px 30px -12px rgba(255, 79, 154, 0.75);
+  --shadow-btn-hover: 0 20px 38px -14px rgba(255, 79, 154, 0.85);
+
+  --font: "Quicksand", ui-rounded, "Segoe UI", system-ui, -apple-system,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+/* --------------------------------------------------------------------------
+   2. Remise à zéro
+   -------------------------------------------------------------------------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text);
+  background-color: var(--pink-soft);
+  background-image:
+    radial-gradient(900px 500px at 8% -10%, #ffe6f1 0%, rgba(255, 230, 241, 0) 60%),
+    radial-gradient(800px 480px at 105% 8%, #ffd6e8 0%, rgba(255, 214, 232, 0) 58%),
+    linear-gradient(180deg, #fff5f9 0%, #ffeaf4 55%, #ffd9e9 100%);
+  background-attachment: fixed;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------------------------------------------------
+   3. Décor de fond (blobs roses flous)
+   -------------------------------------------------------------------------- */
+
+.bg-decor {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55;
+}
+
+.blob--1 {
+  width: 320px;
+  height: 320px;
+  top: -110px;
+  left: -100px;
+  background: #ffb3d4;
+  animation: blobFloat 15s ease-in-out infinite;
+}
+
+.blob--2 {
+  width: 280px;
+  height: 280px;
+  right: -110px;
+  bottom: -90px;
+  background: #ff9ec7;
+  animation: blobFloat 19s ease-in-out infinite reverse;
+}
+
+.blob--3 {
+  width: 220px;
+  height: 220px;
+  top: 42%;
+  left: 62%;
+  background: #ffd6e8;
+  animation: blobFloat 24s ease-in-out infinite;
+}
+
+@keyframes blobFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(24px, -34px, 0) scale(1.08);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Mise en page générale
+   -------------------------------------------------------------------------- */
+
+.stage {
+  position: relative;
+  z-index: 1;
+  flex: 1 0 auto;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding:
+    clamp(18px, 4.5vw, 48px)
+    clamp(14px, 4vw, 28px)
+    clamp(20px, 4vw, 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   5. Carte
+   -------------------------------------------------------------------------- */
+
+.card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: clamp(22px, 5.5vw, 46px);
+  text-align: center;
+  animation: cardIn 0.75s cubic-bezier(0.22, 0.9, 0.28, 1) both;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 6px;
+  background: linear-gradient(90deg, #ff9ec7, #ff4f9a 50%, #ff9ec7);
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(26px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   6. Typographie
+   -------------------------------------------------------------------------- */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(135deg, #ffe6f1, #ffd6e8);
+  border: 1px solid #ffc2dd;
+  color: var(--pink-deep);
+  font-size: clamp(0.74rem, 2.4vw, 0.85rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.title {
+  margin: 1rem 0 0.75rem;
+  font-size: clamp(1.65rem, 6.2vw, 2.6rem);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--pink);
+}
+
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .title {
+    background: linear-gradient(135deg, #ff4f9a 0%, #ff85bd 55%, #ff4f9a 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
+.lead {
+  margin: 0 0 0.9rem;
+  font-size: clamp(0.98rem, 2.8vw, 1.08rem);
+  color: var(--text-soft);
+}
+
+.lead:last-child {
+  margin-bottom: 0;
+}
+
+.lead--strong {
+  margin-top: 1.4rem;
+  font-weight: 700;
+  color: var(--pink-deep);
+}
+
+/* --------------------------------------------------------------------------
+   7. Blocs de contenu (blague & excuses)
+   -------------------------------------------------------------------------- */
+
+.joke,
+.apology {
+  margin: 1.4rem 0 0;
+  padding: clamp(16px, 4vw, 24px);
+  border-radius: var(--radius-md);
+  text-align: left;
+}
+
+.joke {
+  background: linear-gradient(150deg, #fff8fb, #ffeef6);
+  border: 1px dashed #ffb3d4;
+}
+
+.joke p,
+.apology p {
+  margin: 0 0 0.7rem;
+  color: var(--text-soft);
+  font-size: clamp(0.95rem, 2.7vw, 1.03rem);
+}
+
+.joke p:last-child,
+.apology p:last-child {
+  margin-bottom: 0;
+}
+
+.joke .punchline {
+  font-weight: 700;
+  color: var(--pink-dark);
+}
+
+.apology {
+  background: linear-gradient(160deg, #fff8fb, #ffeef6);
+  border: 1px solid #ffdcec;
+}
+
+.apology .apology__sorry {
+  margin: 0.4rem 0 0.9rem;
+  font-size: clamp(1.4rem, 6vw, 1.8rem);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  color: var(--pink-dark);
+}
+
+.promise {
+  margin: 1.6rem 0 0.4rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, #ffe3f0, #ffd6e8);
+  border: 1px dashed #ffa8ce;
+  color: var(--pink-deep);
+  font-weight: 700;
+  font-size: clamp(1rem, 3.4vw, 1.15rem);
+}
+
+/* --------------------------------------------------------------------------
+   8. Boutons
+   -------------------------------------------------------------------------- */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.7rem;
+}
+
+.btn {
+  appearance: none;
+  border: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: clamp(0.98rem, 2.8vw, 1.05rem);
+  line-height: 1.2;
+  padding: 0.95rem 1.6rem;
+  min-height: 52px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+  text-decoration: none;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.actions .btn {
+  flex: 1 1 auto;
+  min-width: 170px;
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, #ff4f9a, #ff7ab8);
+  color: var(--white);
+  box-shadow: var(--shadow-btn);
+}
+
+.btn--primary:hover,
+.btn--primary:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-btn-hover);
+}
+
+.btn--primary:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+.btn--primary.is-success {
+  background: linear-gradient(135deg, #ff2e8b, #ff6fb0);
+  animation: successPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes successPop {
+  0% {
+    transform: scale(1);
+  }
+  45% {
+    transform: scale(1.12);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.btn--ghost {
+  background: var(--white);
+  color: var(--pink-dark);
+  border: 2px solid #ffc2dd;
+  box-shadow: 0 8px 22px -16px rgba(255, 79, 154, 0.9);
+}
+
+.btn--ghost:hover,
+.btn--ghost:focus-visible {
+  transform: translateY(-2px);
+  border-color: var(--pink);
+  background: #fffafd;
+}
+
+.btn--ghost:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Bouton « Non » en fuite */
+.btn--reject.is-floating {
+  position: fixed;
+  z-index: 90;
+  margin: 0;
+  max-width: calc(100vw - 28px);
+  transition:
+    left 0.34s cubic-bezier(0.34, 1.35, 0.5, 1),
+    top 0.34s cubic-bezier(0.34, 1.35, 0.5, 1),
+    transform 0.34s ease,
+    opacity 0.3s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+  will-change: left, top, transform;
+}
+
+/* Espaceur qui conserve la place du bouton « Non » */
+.btn-spacer {
+  display: block;
+  flex: 0 0 auto;
+  pointer-events: none;
+}
+
+/* Focus accessible */
+:focus-visible {
+  outline: 3px solid #ff4f9a;
+  outline-offset: 3px;
+}
+
+/* --------------------------------------------------------------------------
+   9. Message de retour (bouton Non)
+   -------------------------------------------------------------------------- */
+
+.feedback {
+  margin: 1.1rem 0 0;
+  min-height: 1.6em;
+  font-weight: 700;
+  font-size: clamp(0.95rem, 2.8vw, 1.05rem);
+  color: var(--pink-dark);
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity 0.32s ease, transform 0.32s ease;
+}
+
+.feedback.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   10. Cœurs flottants
+   -------------------------------------------------------------------------- */
+
+.hearts-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.heart {
+  position: absolute;
+  bottom: -60px;
+  line-height: 1;
+  animation-name: heartRise;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes heartRise {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.5) rotate(0deg);
+  }
+  12% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-112vh) scale(1.25) rotate(28deg);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   11. Apparition progressive (page finale)
+   -------------------------------------------------------------------------- */
+
+.reveal {
+  opacity: 0;
+  animation: revealUp 0.75s cubic-bezier(0.22, 0.9, 0.28, 1) forwards;
+}
+
+@keyframes revealUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   12. Voile de transition entre les pages
+   -------------------------------------------------------------------------- */
+
+.page-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+  background: linear-gradient(180deg, #fff5f9 0%, #ffd6e8 100%);
+  opacity: 1;
+  animation: veilOut 0.55s ease 0.05s forwards;
+}
+
+.page-veil.is-ready {
+  animation: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.page-veil.is-ready.is-active {
+  opacity: 1;
+}
+
+@keyframes veilOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   13. Pied de page
+   -------------------------------------------------------------------------- */
+
+.site-footer {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  padding:
+    1.1rem
+    clamp(12px, 4vw, 24px)
+    calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  text-align: center;
+  font-size: clamp(0.68rem, 3vw, 0.85rem);
+  line-height: 1.5;
+  color: var(--text-muted);
+  background: linear-gradient(180deg, rgba(255, 214, 232, 0) 0%, rgba(255, 214, 232, 0.65) 100%);
+}
+
+.site-footer p {
+  margin: 0;
+  overflow-wrap: break-word;
+}
+
+/* --------------------------------------------------------------------------
+   14. Responsive
+   -------------------------------------------------------------------------- */
+
+@media (min-width: 768px) {
+  body {
+    font-size: 17px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .card {
+    padding: 52px 56px;
+  }
+}
+
+@media (max-width: 380px) {
+  .actions .btn {
+    min-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   15. Accessibilité : réduction des animations
+   -------------------------------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1;
+  }
+}
+.photo {
+    display: block;
+    width: min(100%, 320px);
+    margin: 0 auto 1.5rem;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px -22px rgba(180, 40, 105, 0.6);
+}
+/* --------------------------------------------------------------------------
+   16. Galerie de photos (page finale)
+   -------------------------------------------------------------------------- */
+
+.photo-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 1.2rem 0 1.6rem;
+  justify-items: center;
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 22px;
+  border: 4px solid var(--white);
+  box-shadow:
+    0 18px 36px -22px rgba(180, 40, 105, 0.55),
+    0 4px 12px -6px rgba(180, 40, 105, 0.25);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.photo:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    0 26px 48px -22px rgba(180, 40, 105, 0.65),
+    0 6px 16px -6px rgba(180, 40, 105, 0.3);
+}
+
+/* Deux photos côte à côte sur écran moyen et plus */
+@media (min-width: 560px) {
+  .photo-gallery {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Sur petits mobiles, on réduit un peu la taille */
+@media (max-width: 380px) {
+  .photo {
+    max-width: 260px;
+    border-radius: 18px;
+  }
+}
+/* --------------------------------------------------------------------------
+   16. Bouton musique flottant (toutes les pages)
+   -------------------------------------------------------------------------- */
+
+.music-toggle {
+  position: fixed;
+  top: max(14px, env(safe-area-inset-top, 0px) + 8px);
+  right: max(14px, env(safe-area-inset-right, 0px) + 8px);
+  z-index: 100;
+
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  min-height: 48px;
+  padding: 0;
+
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.95);
+  border: 2px solid #ffc2dd;
+  color: var(--pink-dark);
+  font-size: 1.25rem;
+  line-height: 1;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+  box-shadow: 0 10px 24px -14px rgba(255, 79, 154, 0.9);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease;
+
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.music-toggle:hover,
+.music-toggle:focus-visible {
+  transform: scale(1.08);
+  box-shadow: 0 14px 28px -14px rgba(255, 79, 154, 1);
+  background: #fff;
+}
+
+.music-toggle:active {
+  transform: scale(0.96);
+}
+
+.music-toggle[aria-pressed="true"] {
+  background: linear-gradient(135deg, #ff4f9a, #ff7ab8);
+  border-color: #ff4f9a;
+  color: #fff;
+}
+
+/* --------------------------------------------------------------------------
+   17. Galerie de photos (page finale)
+   -------------------------------------------------------------------------- */
+
+.photo-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  margin: 1.2rem 0 1.6rem;
+  justify-items: center;
+}
+
+.photo {
+  display: block;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: 22px;
+  border: 4px solid var(--white);
+  box-shadow:
+    0 18px 36px -22px rgba(180, 40, 105, 0.55),
+    0 4px 12px -6px rgba(180, 40, 105, 0.25);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.photo:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow:
+    0 26px 48px -22px rgba(180, 40, 105, 0.65),
+    0 6px 16px -6px rgba(180, 40, 105, 0.3);
+}
+
+@media (min-width: 560px) {
+  .photo-gallery {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 380px) {
+  .photo {
+    max-width: 260px;
+    border-radius: 18px;
+  }
+}
