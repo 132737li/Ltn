@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Mini-site « demande d'excuse » — JavaScript principal
+   Mini-site de salutation romantique — JavaScript principal
    Utilisé par index.html, page2.html et page3.html
    ========================================================================== */
 
@@ -21,7 +21,7 @@
   const prefersReducedMotion =
     window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const HEART_EMOJIS = ['💗', '💖', '💕', '❤️', '💞', '🌸', '✨'];
+  const HEART_EMOJIS = ['🫡', '🫣', '💵', '😎', '💻', '🎧', '🎮'];
 
   /* ------------------------------------------------------------------------
      2. Transition entre les pages (voile rose)
@@ -98,10 +98,11 @@
   });
 
   /* ------------------------------------------------------------------------
-     5. Page finale — ambiance de cœurs
+     5. Page finale — ambiance de cœurs + upload de sa photo
      ------------------------------------------------------------------------ */
 
   const isFinalPage = document.body.classList.contains('page--final');
+  const HER_PHOTO_KEY = 'herPhotoDataUrl';
 
   if (isFinalPage && heartsLayer) {
     burstHearts(14);
@@ -112,6 +113,82 @@
       spawned += 1;
       if (spawned >= 40) window.clearInterval(ambient);
     }, 1100);
+  }
+
+  if (isFinalPage) {
+    const slot = $('#herPhotoSlot');
+    const input = $('#herPhotoInput');
+    const preview = $('#herPhotoPreview');
+    const addBtn = $('#herPhotoLabel');
+    const changeBtn = $('#herPhotoChange');
+
+    function openPhotoPicker() {
+      if (!input) return;
+      input.value = '';
+      input.click();
+    }
+
+    function showHerPhoto(dataUrl) {
+      if (!slot || !preview || !addBtn || !changeBtn) return;
+      preview.src = dataUrl;
+      preview.hidden = false;
+      addBtn.hidden = true;
+      changeBtn.hidden = false;
+      slot.classList.add('has-photo');
+    }
+
+    function persistHerPhoto(dataUrl) {
+      try {
+        window.localStorage.setItem(HER_PHOTO_KEY, dataUrl);
+      } catch (error) {
+        /* Quota ou localStorage indisponible : on ignore. */
+      }
+    }
+
+    try {
+      const saved = window.localStorage.getItem(HER_PHOTO_KEY);
+      if (saved) showHerPhoto(saved);
+    } catch (error) {
+      /* ignore */
+    }
+
+    if (addBtn) {
+      addBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        openPhotoPicker();
+      });
+    }
+
+    if (changeBtn) {
+      changeBtn.addEventListener('click', (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        openPhotoPicker();
+      });
+    }
+
+    if (input) {
+      input.addEventListener('change', () => {
+        const file = input.files && input.files[0];
+        if (!file) return;
+
+        const isImage =
+          (file.type && file.type.startsWith('image/')) ||
+          /\.(jpe?g|png|gif|webp|heic|heif|bmp)$/i.test(file.name || '');
+
+        if (!isImage) return;
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          const dataUrl = reader.result;
+          if (typeof dataUrl !== 'string') return;
+          showHerPhoto(dataUrl);
+          persistHerPhoto(dataUrl);
+          burstHearts(18);
+        };
+        reader.readAsDataURL(file);
+      });
+    }
   }
 
   /* ------------------------------------------------------------------------
@@ -129,14 +206,14 @@
     acceptButton.dataset.busy = 'true';
 
     acceptButton.classList.add('is-success');
-    acceptButton.textContent = '💗 Merci beaucoup !';
+    acceptButton.textContent = '💗 Tu me rends fou…';
 
     if (rejectButton) {
       rejectButton.style.opacity = '0';
       rejectButton.style.pointerEvents = 'none';
     }
 
-    setFeedback('Youpi ! Je savais que tu avais un cœur en or 🥰');
+    setFeedback('Mon cœur vient de sourire… merci 🥰💕');
 
     burstHearts(52);
     leaveTo('page3.html');
@@ -146,30 +223,205 @@
     acceptButton.addEventListener('click', handleAccept);
   }
 
-  /* --- 6.2 Bouton « Non » fuyant ---------------------------------------- */
+/* --- 6.2 Bouton « Non » fuyant ---------------------------------------- */
 
-  const REJECT_LABELS = [
-    '😤 Non',
-    'Attends 😭',
-    'Tu es sûre ?',
-    'Réfléchis encore 🥺',
-    'Impossible 😅',
-    'Essaie encore 😂',
-    'Toujours non ? 😳',
-    'Pitié… 🥹',
-    'Je vais pleurer 😭',
-    'Non non non 😵'
-  ];
+const REJECT_LABELS = [
+
+  // 💗 Messages romantiques
+  'Non 🙈',
+  'Attends… 😳',
+  'Tu es sûre ? 🥺',
+  'Réfléchis encore 💭',
+  'Impossible… 😅',
+  'Essaie encore 💘',
+  'Toujours non ? 🥹',
+  'Mon cœur tremble… 💗',
+  'Dis oui… s’il te plaît 🥺',
+  'Juste un petit oui 💕',
+  'Ne brise pas mon cœur 💔',
+  'Mon cœur te choisit ❤️',
+  'Fais-moi ce cadeau 🎁',
+  'Un oui pour mon cœur 💓',
+  'Tu es mon bonheur 🥰',
+  'Mon cœur attend… 💖',
+  'Dis oui à l’amour 💞',
+  'J’ai besoin de ton oui 🥹',
+  'Mon cœur espère encore 💗',
+  'Laisse parler ton cœur 💝',
+  'Un petit oui magique ✨',
+  'Mon amour, réfléchis 💋',
+  'Tu fais battre mon cœur 💓',
+  'Je crois en nous 💑',
+  'Notre histoire commence ? 💕',
+
+  // 🥺 Messages mignons
+  'S’il te plaît… 🥺',
+  'Allez, juste une fois 🙏',
+  'Pour me faire sourire ? 😊',
+  'Un petit effort 💕',
+  'Ne sois pas timide 🙈',
+  'Tu me fais rougir ☺️',
+  'Je suis tout gêné 😳',
+  'Mon petit cœur 🥹',
+  'Tu es trop adorable 😍',
+  'Regarde mes yeux 🥺',
+  'Un oui tout doux 🧸',
+  'Fais-moi un câlin 🤗',
+  'Je boude maintenant 😗',
+  'Tu es méchante… 😭',
+  'Mon cœur fait boum 💓',
+  'Je fonds devant toi 🫠',
+  'Tu me rends fou 😵‍💫',
+  'Un bisou pour dire oui ? 😘',
+  'Ne me laisse pas comme ça 🥹',
+  'J’attends ton sourire 😊',
+  'Tu me donnes de l’espoir 🌷',
+  'Encore une petite chance ? 🥺',
+  'Je suis trop mignon, non ? 🐻',
+  'Dis oui à ce pauvre cœur 💔',
+  'Promis, je suis gentil 😇',
+
+  // 😂 Messages drôles
+  'Erreur 404 : NON introuvable 🤖',
+  'Ce bouton est fatigué 😴',
+  'Oups, raté ! 😂',
+  'Tu m’as presque eu 😜',
+  'Le NON est en vacances 🏖️',
+  'Bouton en fuite ! 🏃‍♂️',
+  'Attrape-moi si tu peux 😈',
+  'Tu es trop rapide ! ⚡',
+  'Je refuse de refuser 🤣',
+  'Le destin dit OUI 🔮',
+  'Essaie encore, championne 😎',
+  'Ce NON a peur de toi 😱',
+  'Le bouton panique 🚨',
+  'Mission impossible ? 🎬',
+  'Tu cliques pour rien 😂',
+  'Même le bouton veut OUI 😏',
+  'Le NON a disparu 👻',
+  'Attention, bouton sauvage 🐒',
+  'Tu ne m’auras pas 😝',
+  'Le bouton fait du sport 🏃',
+  'J’ai glissé, chef ! 🤣',
+  'Où est passé le NON ? 🔍',
+  'Le bouton est timide 🙈',
+  'Il faut mériter ce NON 😜',
+  'Le NON démissionne ! 😂',
+
+  // 😏 Messages séduisants
+  'Avoue que tu m’aimes 😏',
+  'Tu craques déjà ? 😍',
+  'Je sais que tu hésites 😉',
+  'Ton sourire dit oui 😊',
+  'Ne résiste pas au charme 💋',
+  'Tu penses à moi, hein ? 🥰',
+  'Je te plais un peu ? 👀',
+  'Ton cœur a déjà choisi ❤️',
+  'Fais-moi confiance 😉',
+  'Laisse-toi tenter 💘',
+  'Un oui ne coûte rien 😇',
+  'Tu sais ce que je veux 😏',
+  'Je vois ton petit sourire 😁',
+  'On serait beaux ensemble 💑',
+  'Tu imagines déjà nous deux ? 💞',
+  'Arrête de faire semblant 😜',
+  'Je te vois rougir 🌹',
+  'Un rendez-vous, peut-être ? 🌙',
+  'Et si on essayait ? 💕',
+  'Je te laisse une chance 😌',
+  'Tu es mon petit secret 🤫',
+  'Ton regard me trahit 👀',
+  'Je suis ton admirateur 😍',
+  'Un peu de romantisme ? 🌹',
+  'Allez, tombe sous mon charme ✨',
+
+  // 💌 Messages pour une déclaration
+  'Veux-tu être mon amour ? ❤️',
+  'Donne une chance à notre histoire 💌',
+  'Et si c’était nous ? 💑',
+  'Je t’ai choisie 💖',
+  'Mon cœur t’appartient 💝',
+  'Tu veux écrire notre histoire ? 📖',
+  'Un avenir à deux ? 🌅',
+  'Veux-tu être ma Valentine ? 💘',
+  'J’aimerais être ton bonheur 🥰',
+  'Je veux te faire sourire chaque jour 🌞',
+  'Une histoire pleine d’amour ? 💞',
+  'Veux-tu être ma personne préférée ? 🫶',
+  'Je rêve d’un nous 💭',
+  'Tu mérites tout mon amour 🌹',
+  'Un premier rendez-vous ? ☕',
+  'Et si on se donnait une chance ? 💗',
+  'J’aimerais apprendre à te connaître 💌',
+  'Un petit début d’histoire ? 🌷',
+  'Veux-tu partager un moment avec moi ? ✨',
+  'J’ai quelque chose à te dire… 💓',
+  'Tu occupes mes pensées 💭',
+  'Mon plus beau rêve, c’est toi 🌙',
+  'Je voudrais te tenir la main 🤝',
+  'Un câlin maintenant ? 🤗',
+  'Et si tu disais oui ? 💖',
+
+  // 🥹 Dernières tentatives
+  'Je peux encore espérer ? 🥺',
+  'Une dernière chance ? 🙏',
+  'Tu me laisses essayer ? 💗',
+  'Ne réponds pas trop vite 😳',
+  'Pense à mon pauvre cœur 🥹',
+  'J’ai préparé mon plus beau sourire 😊',
+  'Mon cœur n’abandonne pas 💪❤️',
+  'Je garde espoir 🌈',
+  'Un oui me rendrait heureux 🥰',
+  'Tu veux vraiment me faire attendre ? ⏳',
+  'Je suis toujours là 💞',
+  'Mon amour est patient 🌷',
+  'Je tente ma chance 🍀',
+  'Et si tu changeais d’avis ? 💕',
+  'Je crois que tu vas dire oui 😍',
+  'Allez, fais-moi rêver ✨',
+  'Le suspense me tue 😭',
+  'Mon cœur attend le verdict ⚖️💓',
+  'Je retiens mon souffle 😮',
+  'Alors… tu dis oui ? 🥺',
+  'Ne me laisse pas dans le doute 💌',
+  'Un sourire avant de répondre ? 😊',
+  'Je croise les doigts 🤞',
+  'Le bonheur est à un clic 💖',
+  'Promis, je serai heureux 😁',
+
+  // 💘 Les dernières phrases
+  'Le OUI est juste là ! 👉💗',
+  'Tu sais déjà quoi choisir 😘',
+  'Mon cœur te dit merci 💝',
+  'Fais confiance à la magie ✨',
+  'L’amour nous attend 💑',
+  'Un clic, mille émotions 💓',
+  'Je t’offre mon plus beau sourire 🌹',
+  'Le bonheur commence ici 💖',
+  'Tu veux me rendre heureux ? 🥹',
+  'Je te laisse encore réfléchir 💭',
+  'Ce serait notre joli secret 🤫',
+  'Je suis prêt à t’écouter ❤️',
+  'Un petit oui pour commencer ? 🌷',
+  'Le destin nous regarde 👀',
+  'Allez… choisis l’amour 💘',
+  'Tu as encore changé d’avis ? 😳',
+  'Je ne perds pas espoir 🥰',
+  'Mon cœur fait la fête 🎉💗',
+  'Et si on disait OUI ensemble ? 💞',
+  'Le bouton NON abandonne ! 🏳️😂'
+
+];
 
   const REJECT_MESSAGES = [
-    'Oups 😅 essaie encore...',
-    'Tu es vraiment sûre ? 🥺',
-    'Réfléchis bien... 😭',
-    'Ce bouton est timide, il se sauve 🙈',
-    'Tu peux toujours courir 🏃‍♀️💨',
+    'Oups… ce bouton se sauve dès qu’on l’approche 🙈',
+    'Tu es vraiment sûre de vouloir dire non ? 🥺',
+    'Mon cœur espère encore un peu… 💕',
+    'Il paraît que « Oui » sonne beaucoup mieux 💗',
     'Même le bouton est de mon côté 😌',
-    'Il paraît que « Oui » est beaucoup plus simple 💗',
-    'Bon... on arrête de jouer ? 🥺'
+    'Allez… un petit oui pour moi ? 🥹',
+    'Je te promets que ça vaut le coup… ✨',
+    'Bon… on arrête de jouer et on dit oui ? 💘'
   ];
 
   const DODGE_COOLDOWN = 400;
@@ -365,7 +617,7 @@
 
   const bgMusic = $('#pageMusic');
   const musicToggle = $('#musicToggle');
-  const MUSIC_FLAG = 'apologyMusicUnlocked';
+  const MUSIC_FLAG = 'romanceMusicUnlocked';
 
   if (bgMusic) {
     bgMusic.volume = 0.55;

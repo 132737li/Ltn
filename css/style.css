@@ -1,6 +1,6 @@
 /* ==========================================================================
-   Mini-site « demande d'excuse » — feuille de style principale
-   Thème : rose / pink 💗
+   Mini-site de salutation romantique — feuille de style principale
+   Thème : rose / pink 💗 — responsive mobile / tablette / PC
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -747,6 +747,163 @@ body {
 
 @media (max-width: 380px) {
   .photo {
+    max-width: 260px;
+    border-radius: 18px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   18. Emplacement pour sa photo (upload)
+   -------------------------------------------------------------------------- */
+
+.photo-slot {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  aspect-ratio: 4 / 5;
+  border-radius: 22px;
+  border: 3px dashed #ffb3d4;
+  background:
+    linear-gradient(160deg, #fff8fb 0%, #ffe6f1 100%);
+  box-shadow:
+    0 18px 36px -22px rgba(180, 40, 105, 0.35),
+    0 4px 12px -6px rgba(180, 40, 105, 0.15);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.photo-slot:hover {
+  border-color: var(--pink);
+  transform: translateY(-2px);
+  box-shadow:
+    0 22px 40px -22px rgba(180, 40, 105, 0.5),
+    0 6px 14px -6px rgba(180, 40, 105, 0.22);
+}
+
+.photo-slot.has-photo {
+  border-style: solid;
+  border-width: 4px;
+  border-color: var(--white);
+  background: transparent;
+}
+
+.photo-slot.has-photo .photo-slot__btn {
+  display: none;
+}
+
+.photo-slot__btn[hidden],
+.photo-slot__change[hidden],
+.photo-slot__preview[hidden] {
+  display: none !important;
+}
+
+.photo-slot__input {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+  border: 0;
+  font-size: 0;
+}
+
+.photo-slot.has-photo .photo-slot__input {
+  pointer-events: none;
+}
+
+.photo-slot__btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  width: 100%;
+  height: 100%;
+  padding: 1.25rem;
+  margin: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  text-align: center;
+  color: var(--pink-dark);
+  font-family: var(--font);
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  position: relative;
+  z-index: 1;
+}
+
+.photo-slot__icon {
+  font-size: clamp(1.8rem, 5vw, 2.4rem);
+  line-height: 1;
+  margin-bottom: 0.25rem;
+}
+
+.photo-slot__text {
+  font-weight: 700;
+  font-size: clamp(0.95rem, 2.8vw, 1.1rem);
+}
+
+.photo-slot__hint {
+  font-size: clamp(0.78rem, 2.2vw, 0.9rem);
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.photo-slot__preview {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  object-fit: cover;
+}
+
+.photo-slot__preview:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.photo-slot__change {
+  position: absolute;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  z-index: 6;
+  padding: 0.45rem 0.9rem;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.94);
+  color: var(--pink-dark);
+  font-family: var(--font);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 18px -10px rgba(180, 40, 105, 0.7);
+  transition: background-color 0.2s ease, transform 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+.photo-slot__change:hover,
+.photo-slot__change:focus-visible {
+  background: #fff;
+  transform: translateX(-50%) scale(1.04);
+}
+
+@media (max-width: 380px) {
+  .photo-slot {
     max-width: 260px;
     border-radius: 18px;
   }
