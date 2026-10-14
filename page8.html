@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ff4f9a" />
+  <meta name="description" content="Cent petites raisons, rien que pour toi." />
+  <title>100 raisons de t’aimer</title>
+
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/config.js"></script>
+</head>
+
+<body class="page page--hundred" data-page="hundred" data-step="8" data-steps="11" data-fx="petals,stars">
+
+  <audio id="pageMusic" src="assets/musique3.mp3" loop preload="auto"></audio>
+  <button type="button" class="music-toggle" id="musicToggle" aria-pressed="false"
+    aria-label="Activer la musique">🎵</button>
+
+  <div class="bg-decor" aria-hidden="true">
+    <span class="blob blob--1"></span>
+    <span class="blob blob--2"></span>
+    <span class="blob blob--3"></span>
+  </div>
+
+  <div class="hearts-layer" id="heartsLayer" aria-hidden="true"></div>
+
+  <main class="stage">
+    <section class="card" aria-labelledby="main-title">
+
+      <span class="badge">100 raisons 💌</span>
+
+      <h1 class="title" id="main-title">100 raisons de t’aimer</h1>
+
+      <div class="reason-card" id="reasonCard">
+        <span class="reason-card__num" id="reasonNum">♥</span>
+        <p class="reason-card__text" id="reasonText" aria-live="polite">Touche le bouton pour découvrir une raison…</p>
+      </div>
+
+      <div class="progress" aria-hidden="true"><span class="progress__bar" id="hundredBar"></span></div>
+      <p class="progress__text" id="hundredCount">0 / 100 raisons découvertes</p>
+
+      <div class="actions">
+        <button type="button" class="btn btn--primary btn--pulse" id="drawReason">Tirer une raison 💌</button>
+        <button type="button" class="btn btn--ghost" id="showAll">Voir les 100 ✨</button>
+      </div>
+
+      <ol class="reason-list" id="reasonList" hidden></ol>
+
+      <div class="actions" id="hundredNext" hidden>
+        <a class="btn btn--primary btn--pulse" href="page9.html">Une dernière question 💌</a>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Léon Corazón — fait avec le cœur</p>
+  </footer>
+
+  <div class="page-veil" aria-hidden="true"></div>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>

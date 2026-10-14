@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ff4f9a" />
+  <meta name="description" content="Merci d’être toi… et de me laisser te dire tout ça." />
+  <title>Rien que pour toi</title>
+
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/config.js"></script>
+</head>
+
+<body class="page page--final" data-page="final" data-step="10" data-steps="11" data-fx="balloons,petals">
+
+  <audio id="pageMusic" src="assets/musique3.mp3" loop preload="auto"></audio>
+  <button type="button" class="music-toggle" id="musicToggle" aria-pressed="false"
+    aria-label="Activer la musique">🎵</button>
+
+  <div class="bg-decor" aria-hidden="true">
+    <span class="blob blob--1"></span>
+    <span class="blob blob--2"></span>
+    <span class="blob blob--3"></span>
+  </div>
+
+  <div class="hearts-layer" id="heartsLayer" aria-hidden="true"></div>
+
+  <main class="stage">
+    <section class="card card--final" aria-labelledby="main-title">
+
+      <span class="badge">Notre petit secret ✨</span>
+
+      <h1 class="title" id="main-title">Tu viens de faire battre mon cœur</h1>
+
+      <div class="ticket reveal" aria-label="Récapitulatif de notre rendez-vous">
+        <p class="ticket__head">🎟️ Rendez-vous confirmé</p>
+        <p class="ticket__row"><span>Au programme</span><strong id="ticketKind">une surprise 🎁</strong></p>
+        <p class="ticket__row"><span>Quand</span><strong id="ticketWhen">à choisir ensemble 💞</strong></p>
+        <p class="ticket__row"><span>Avec</span><strong>Moi, très ému 🥹</strong></p>
+      </div>
+
+      <div class="photo-gallery">
+        <img src="assets/photo.png" alt="Un souvenir de nous deux" class="photo" />
+
+        <div class="photo-slot" id="herPhotoSlot">
+          <img id="herPhotoPreview" class="photo photo-slot__preview" alt="Ta photo" hidden />
+          <button type="button" class="photo-slot__btn" id="herPhotoLabel">
+            <span class="photo-slot__icon" aria-hidden="true">📷</span>
+            <span class="photo-slot__text">Ajoute ta photo</span>
+            <span class="photo-slot__hint">si tu es d’accord 💕</span>
+          </button>
+          <button type="button" class="photo-slot__change" id="herPhotoChange" hidden>
+            Changer la photo
+          </button>
+          <input type="file" id="herPhotoInput" class="photo-slot__input" accept="image/*"
+            aria-label="Ajouter ta photo" />
+        </div>
+      </div>
+
+      <p class="lead reveal">Merci d’avoir ouvert cette page… et ton cœur avec.</p>
+      <p class="lead reveal">
+        Tu es belle bien au-delà de ce que les yeux voient — dans ta façon d’être,
+        de rire, de rendre le silence doux.
+      </p>
+      <p class="lead reveal">
+        J’aime l’idée de te protéger, de te faire sourire, de te rappeler
+        chaque jour à quel point tu comptes pour moi.
+      </p>
+      <p class="lead reveal">
+        Si tu me laisses un peu de place… je veux apprendre ton rythme,
+        tes rêves, tes fragilités — et les chérir comme un trésor.
+      </p>
+      <p class="lead reveal">
+        Ce n’est pas qu’un message. C’est une invitation : restons proches,
+        restons sincères… et voyons où notre histoire peut nous mener. 💗
+      </p>
+
+      <p class="promise reveal">Promis : je serai là. Pour toi. Vraiment. 🤞💕</p>
+
+      <div class="countdown reveal" id="countdown" aria-label="Compte à rebours jusqu’à notre rendez-vous">
+        <p class="countdown__title">⏳ Plus que…</p>
+        <div class="countdown__grid" id="countdownGrid" hidden>
+          <div class="countdown__cell"><strong id="cdDays">0</strong><span>jours</span></div>
+          <div class="countdown__cell"><strong id="cdHours">0</strong><span>heures</span></div>
+          <div class="countdown__cell"><strong id="cdMinutes">0</strong><span>minutes</span></div>
+          <div class="countdown__cell"><strong id="cdSeconds">0</strong><span>secondes</span></div>
+        </div>
+        <p class="countdown__done" id="countdownDone" hidden>C’est aujourd’hui… 💞</p>
+        <div class="countdown__setup" id="countdownSetup" hidden>
+          <p>Choisis le jour et l’heure de notre rendez-vous pour lancer le compte à rebours :</p>
+          <div class="poster__when">
+            <label class="field"><span>Quel jour ? 📅</span><input type="date" id="cdDateInput" /></label>
+            <label class="field"><span>À quelle heure ? 🕖</span><input type="time" id="cdTimeInput" value="19:00" /></label>
+          </div>
+          <button type="button" class="btn btn--primary" id="cdStart">Lancer le compte à rebours ⏳</button>
+        </div>
+        <button type="button" class="countdown__edit" id="cdEdit" hidden>Changer la date</button>
+      </div>
+
+      <div class="actions">
+        <a class="btn btn--primary btn--pulse" href="page11.html">Laisse-moi un petit mot 💌</a>
+        <button type="button" class="btn btn--ghost" id="fireworksBtn">Feu d’artifice 🎆</button>
+        <button type="button" class="btn btn--ghost" id="moreLove">Encore des cœurs 💞</button>
+      </div>
+      <p class="lead"><a class="link-soft" href="index.html">Relire depuis le début ✨</a></p>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Léon Corazón — fait avec le cœur</p>
+  </footer>
+
+  <div class="page-veil" aria-hidden="true"></div>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>

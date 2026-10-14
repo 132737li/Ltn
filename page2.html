@@ -13,12 +13,14 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
 
   <link rel="stylesheet" href="css/style.css" />
+  <script src="js/config.js"></script>
 </head>
 
-<body class="page page--ask">
+<body class="page page--ask" data-page="confession" data-step="2" data-steps="11" data-fx="fireflies">
 
   <audio id="pageMusic" src="assets/musique2.mp3" loop preload="auto"></audio>
   <button type="button" class="music-toggle" id="musicToggle" aria-pressed="false"
@@ -40,22 +42,22 @@
       <h1 class="title" id="main-title">Tu comptes plus que tout pour moi</h1>
 
       <div class="apology">
-        <p>Il y a des personnes qu’on croise… et d’autres qui restent gravées dans le sang.</p>
-        <p>Toi, tu es de celles-là. Ta voix, ton regard, la façon dont tu existes… tout me captive.</p>
-        <p>Quand tu es près de moi, le temps ralentit. Quand tu es loin, mon esprit te cherche encore.</p>
-        <p class="apology__sorry">Je veux être celui sur qui tu peux compter. Toujours.</p>
-        <p>
+        <p class="reveal">Il y a des personnes qu’on croise… et d’autres qui restent gravées dans le sang.</p>
+        <p class="reveal">Toi, tu es de celles-là. Ta voix, ton regard, la façon dont tu existes… tout me captive.</p>
+        <p class="reveal">Quand tu es près de moi, le temps ralentit. Quand tu es loin, mon esprit te cherche encore.</p>
+        <p class="apology__sorry reveal">Je veux être celui sur qui tu peux compter. Toujours.</p>
+        <p class="reveal">
           Alors je te le dis clairement : tu m’attires, tu m’inspires, et je veux continuer
           à découvrir chaque détail de toi… lentement, tendrement, sincèrement.
         </p>
       </div>
 
-      <p class="lead lead--strong">
+      <p class="lead lead--strong reveal">
         Et toi… est-ce que tu ressens un peu la même chose ? 🥺💗
       </p>
 
-      <div class="actions" id="actions">
-        <button type="button" class="btn btn--primary" id="acceptButton">
+      <div class="actions reveal" id="actions">
+        <button type="button" class="btn btn--primary btn--pulse" id="acceptButton">
           Oui… moi aussi 💕
         </button>
         <button type="button" class="btn btn--ghost btn--reject" id="rejectButton">

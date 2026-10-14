@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ff4f9a" />
+  <meta name="description" content="Laisse-moi un petit mot, je le lirai avec le cœur." />
+  <title>Livre d’or</title>
+
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="js/config.js"></script>
+</head>
+
+<body class="page page--guest" data-page="guestbook" data-step="11" data-steps="11" data-fx="petals,fireflies">
+
+  <audio id="pageMusic" src="assets/musique.mp3" loop preload="auto"></audio>
+  <button type="button" class="music-toggle" id="musicToggle" aria-pressed="false"
+    aria-label="Activer la musique">🎵</button>
+
+  <div class="bg-decor" aria-hidden="true">
+    <span class="blob blob--1"></span>
+    <span class="blob blob--2"></span>
+    <span class="blob blob--3"></span>
+  </div>
+
+  <div class="hearts-layer" id="heartsLayer" aria-hidden="true"></div>
+
+  <main class="stage">
+    <section class="card" aria-labelledby="main-title">
+
+      <span class="badge">Livre d’or 📖</span>
+
+      <h1 class="title" id="main-title">Laisse-moi un petit mot</h1>
+
+      <p class="lead">Ce que tu ressens, ce que tu veux me dire… je le lirai avec le cœur. 💗</p>
+
+      <form class="guest" id="guestForm" novalidate>
+        <label class="field">
+          <span>Ton prénom <small>(facultatif)</small></span>
+          <input type="text" id="guestName" maxlength="40" autocomplete="given-name" />
+        </label>
+
+        <fieldset class="poster__choices">
+          <legend>Ton humeur <small>(facultatif)</small></legend>
+          <div class="chips">
+          <label class="chip chip--mood">
+            <input type="radio" name="guestMood" value="😍" />
+            <span><span aria-hidden="true">😍</span> Charmée</span>
+          </label>
+          <label class="chip chip--mood">
+            <input type="radio" name="guestMood" value="🥰" />
+            <span><span aria-hidden="true">🥰</span> Touchée</span>
+          </label>
+          <label class="chip chip--mood">
+            <input type="radio" name="guestMood" value="😊" />
+            <span><span aria-hidden="true">😊</span> Contente</span>
+          </label>
+          <label class="chip chip--mood">
+            <input type="radio" name="guestMood" value="😳" />
+            <span><span aria-hidden="true">😳</span> Gênée</span>
+          </label>
+          <label class="chip chip--mood">
+            <input type="radio" name="guestMood" value="💖" />
+            <span><span aria-hidden="true">💖</span> Amoureuse</span>
+          </label>
+          </div>
+        </fieldset>
+
+        <label class="field">
+          <span>Ton message 💌</span>
+          <textarea id="guestMessage" rows="5" maxlength="500" required
+            placeholder="Écris ici… même un simple « merci » me fera sourire."></textarea>
+        </label>
+        <p class="guest__count" id="guestCount" aria-hidden="true">0 / 500</p>
+
+        <button type="submit" class="btn btn--primary btn--pulse" id="guestSend">Envoyer mon message 💌</button>
+        <p class="feedback is-visible" id="guestStatus" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="wall" id="guestWall" aria-label="Les messages déjà écrits" hidden>
+        <h2 class="wall__title">📌 Tes mots sur ce mur</h2>
+        <div class="wall__notes" id="guestNotes"></div>
+      </div>
+
+      <div class="actions">
+        <a class="btn btn--ghost" href="index.html">Relire depuis le début ✨</a>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© Léon Corazón — fait avec le cœur</p>
+  </footer>
+
+  <div class="page-veil" aria-hidden="true"></div>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>

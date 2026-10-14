@@ -5,23 +5,24 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#ff4f9a" />
-  <meta name="description" content="Merci d’être toi… et de me laisser te dire tout ça." />
-  <title>Rien que pour toi</title>
+  <meta name="description" content="Six petites raisons qui font battre mon cœur." />
+  <title>Ce que j’aime chez toi</title>
 
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap"
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
 
   <link rel="stylesheet" href="css/style.css" />
+  <script src="js/config.js"></script>
 </head>
 
-<body class="page page--final">
+<body class="page page--reasons" data-page="reasons" data-step="3" data-steps="11" data-fx="stars,petals">
 
-  <audio id="pageMusic" src="assets/musique3.mp3" loop preload="auto"></audio>
+  <audio id="pageMusic" src="assets/musique1.mp3" loop preload="auto"></audio>
   <button type="button" class="music-toggle" id="musicToggle" aria-pressed="false"
     aria-label="Activer la musique">🎵</button>
 
@@ -34,52 +35,100 @@
   <div class="hearts-layer" id="heartsLayer" aria-hidden="true"></div>
 
   <main class="stage">
-    <section class="card card--final" aria-labelledby="main-title">
+    <section class="card" aria-labelledby="main-title">
 
-      <span class="badge">Notre petit secret ✨</span>
+      <span class="badge">Ce que j’aime chez toi 🌸</span>
 
-      <h1 class="title" id="main-title">Tu viens de faire battre mon cœur</h1>
+      <h1 class="title" id="main-title">Six petites raisons…</h1>
 
-      <div class="photo-gallery">
-        <img src="assets/photo.png" alt="Un souvenir de nous deux" class="photo" />
+      <p class="lead">Touche chaque carte pour découvrir ce qu’elle cache. 💌</p>
 
-        <div class="photo-slot" id="herPhotoSlot">
-          <img id="herPhotoPreview" class="photo photo-slot__preview" alt="Ta photo" hidden />
-          <button type="button" class="photo-slot__btn" id="herPhotoLabel">
-            <span class="photo-slot__icon" aria-hidden="true">📷</span>
-            <span class="photo-slot__text">Ajoute ta photo</span>
-            <span class="photo-slot__hint">si tu es d’accord 💕</span>
-          </button>
-          <button type="button" class="photo-slot__change" id="herPhotoChange" hidden>
-            Changer la photo
-          </button>
-          <input type="file" id="herPhotoInput" class="photo-slot__input" accept="image/*"
-            aria-label="Ajouter ta photo" />
-        </div>
+      <div class="flip-grid" id="flipGrid">
+        <button type="button" class="flip" aria-pressed="false" style="--i:0">
+          <span class="flip__inner">
+            <span class="flip__face flip__front">
+              <span class="flip__emoji" aria-hidden="true">😊</span>
+              <span class="flip__label">Ton sourire</span>
+              <span class="flip__tap">touche pour découvrir</span>
+            </span>
+            <span class="flip__face flip__back">
+              <span class="flip__title">Ton sourire 😊</span>
+              <span class="flip__text">Il illumine mes journées les plus grises, sans même que tu t’en rendes compte.</span>
+            </span>
+          </span>
+        </button>
+        <button type="button" class="flip" aria-pressed="false" style="--i:1">
+          <span class="flip__inner">
+            <span class="flip__face flip__front">
+              <span class="flip__emoji" aria-hidden="true">🎶</span>
+              <span class="flip__label">Ta voix</span>
+              <span class="flip__tap">touche pour découvrir</span>
+            </span>
+            <span class="flip__face flip__back">
+              <span class="flip__title">Ta voix 🎶</span>
+              <span class="flip__text">Une mélodie douce que je pourrais écouter pendant des heures.</span>
+            </span>
+          </span>
+        </button>
+        <button type="button" class="flip" aria-pressed="false" style="--i:2">
+          <span class="flip__inner">
+            <span class="flip__face flip__front">
+              <span class="flip__emoji" aria-hidden="true">👀</span>
+              <span class="flip__label">Ton regard</span>
+              <span class="flip__tap">touche pour découvrir</span>
+            </span>
+            <span class="flip__face flip__back">
+              <span class="flip__title">Ton regard 👀</span>
+              <span class="flip__text">En un instant, il me fait oublier tout ce qui m’entoure.</span>
+            </span>
+          </span>
+        </button>
+        <button type="button" class="flip" aria-pressed="false" style="--i:3">
+          <span class="flip__inner">
+            <span class="flip__face flip__front">
+              <span class="flip__emoji" aria-hidden="true">🌷</span>
+              <span class="flip__label">Ta douceur</span>
+              <span class="flip__tap">touche pour découvrir</span>
+            </span>
+            <span class="flip__face flip__back">
+              <span class="flip__title">Ta douceur 🌷</span>
+              <span class="flip__text">Ta façon d’être avec les autres me rappelle qu’il existe encore de belles choses.</span>
+            </span>
+          </span>
+        </button>
+        <button type="button" class="flip" aria-pressed="false" style="--i:4">
+          <span class="flip__inner">
+            <span class="flip__face flip__front">
+              <span class="flip__emoji" aria-hidden="true">😂</span>
+              <span class="flip__label">Ton rire</span>
+              <span class="flip__tap">touche pour découvrir</span>
+            </span>
+            <span class="flip__face flip__back">
+              <span class="flip__title">Ton rire 😂</span>
+              <span class="flip__text">Il est contagieux… et il est devenu mon son préféré.</span>
+            </span>
+          </span>
+        </button>
+        <button type="button" class="flip" aria-pressed="false" style="--i:5">
+          <span class="flip__inner">
+            <span class="flip__face flip__front">
+              <span class="flip__emoji" aria-hidden="true">💖</span>
+              <span class="flip__label">Ton cœur</span>
+              <span class="flip__tap">touche pour découvrir</span>
+            </span>
+            <span class="flip__face flip__back">
+              <span class="flip__title">Ton cœur 💖</span>
+              <span class="flip__text">Le plus précieux : sincère, généreux, et tellement toi.</span>
+            </span>
+          </span>
+        </button>
       </div>
 
-      <p class="lead reveal">Merci d’avoir ouvert cette page… et ton cœur avec.</p>
-      <p class="lead reveal">
-        Tu es belle bien au-delà de ce que les yeux voient — dans ta façon d’être,
-        de rire, de rendre le silence doux.
-      </p>
-      <p class="lead reveal">
-        J’aime l’idée de te protéger, de te faire sourire, de te rappeler
-        chaque jour à quel point tu comptes pour moi.
-      </p>
-      <p class="lead reveal">
-        Si tu me laisses un peu de place… je veux apprendre ton rythme,
-        tes rêves, tes fragilités — et les chérir comme un trésor.
-      </p>
-      <p class="lead reveal">
-        Ce n’est pas qu’un message. C’est une invitation : restons proches,
-        restons sincères… et voyons où notre histoire peut nous mener. 💗
-      </p>
+      <div class="progress" aria-hidden="true"><span class="progress__bar" id="reasonBar"></span></div>
+      <p class="progress__text" id="reasonCount" role="status" aria-live="polite">0 / 6 cartes découvertes</p>
 
-      <p class="promise reveal">Promis : je serai là. Pour toi. Vraiment. 🤞💕</p>
-
-      <div class="actions">
-        <a class="btn btn--primary" href="index.html">Relire depuis le début ✨</a>
+      <div class="actions" id="reasonNext" hidden>
+        <a class="btn btn--primary btn--pulse" href="page4.html">Ouvrir ma lettre ✉️</a>
       </div>
 
     </section>

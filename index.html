@@ -13,12 +13,14 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Quicksand:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
 
   <link rel="stylesheet" href="css/style.css" />
+  <script src="js/config.js"></script>
 </head>
 
-<body class="page page--home">
+<body class="page page--home" data-page="index" data-step="1" data-steps="11" data-fx="petals">
 
   <audio id="pageMusic" src="assets/musique.mp3" loop preload="auto"></audio>
   <button type="button" class="music-toggle" id="musicToggle" aria-pressed="false"
@@ -30,27 +32,35 @@
     <span class="blob blob--3"></span>
   </div>
 
+  <div class="hearts-layer" id="heartsLayer" aria-hidden="true"></div>
+
   <main class="stage">
     <section class="card" aria-labelledby="main-title">
 
+      <div class="emblem" aria-hidden="true">
+        <span class="emblem__ring"></span>
+        <span class="emblem__ring emblem__ring--2"></span>
+        <span class="emblem__heart">💗</span>
+      </div>
+
       <span class="badge">Pour toi seule ✨</span>
 
-      <h1 class="title" id="main-title">Salut, belle âme…</h1>
+      <h1 class="title" id="main-title" data-tpl="Salut, {name}…" data-fallback="belle âme">Salut, belle âme…</h1>
 
       <p class="lead">J’avais envie de t’écrire quelque chose de vrai.</p>
 
       <div class="joke">
-        <p>Chaque fois que tu croises mon esprit, le monde devient un peu plus doux.</p>
-        <p>Ton sourire a ce pouvoir étrange… il me fait perdre le fil, et je m’en fiche.</p>
-        <p class="punchline">Alors j’ai décidé de tout te dire, sans détour. 💕</p>
+        <p class="reveal">Chaque fois que tu croises mon esprit, le monde devient un peu plus doux.</p>
+        <p class="reveal">Ton sourire a ce pouvoir étrange… il me fait perdre le fil, et je m’en fiche.</p>
+        <p class="punchline reveal">Alors j’ai décidé de tout te dire, sans détour. 💕</p>
       </div>
 
-      <p class="lead lead--strong">
+      <p class="lead lead--strong reveal">
         Prépare ton cœur… la suite est juste pour toi.
       </p>
 
-      <div class="actions">
-        <a class="btn btn--primary" href="page2.html">Continuer 💗</a>
+      <div class="actions reveal">
+        <a class="btn btn--primary btn--pulse" href="page2.html">Continuer 💗</a>
       </div>
 
     </section>
