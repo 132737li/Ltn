@@ -202,7 +202,7 @@
 
   // Mini-cœurs qui jaillissent à l'endroit touché.
   function burstAt(x, y, count) {
-    if (prefersReducedMotion || !Element.prototype.animate) return;
+    if (prefersReducedMotion || !Element.prototype.animate || pageClass('page--lock')) return;
 
     for (let i = 0; i < count; i += 1) {
       const bit = document.createElement('span');
@@ -249,7 +249,7 @@
 
     let last = 0;
     window.addEventListener('pointermove', (event) => {
-      if (event.pointerType !== 'mouse') return;
+      if (event.pointerType !== 'mouse' || pageClass('page--lock')) return;
       const now = performance.now();
       if (now - last < 55) return;
       last = now;
@@ -1194,6 +1194,77 @@
 
   const UNLOCK_KEY = 'romanceUnlocked';
 
+  // Pluie de chiffres façon terminal (fond de la page d'entrée)
+  function startMatrixRain() {
+    if (prefersReducedMotion) return { boost() {} };
+
+    const canvas = document.createElement('canvas');
+    canvas.className = 'matrix-canvas';
+    canvas.setAttribute('aria-hidden', 'true');
+    body.appendChild(canvas);
+
+    const ctx = canvas.getContext('2d');
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const SIZE = 16;
+    const CHARS = '0123456789ABCDEF';
+
+    let width = 0;
+    let height = 0;
+    let drops = [];
+    let stopped = false;
+    let boosted = false;
+    let last = 0;
+
+    function resize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.fillStyle = '#060a08';
+      ctx.fillRect(0, 0, width, height);
+      drops = Array.from({ length: Math.ceil(width / SIZE) }, () => random(-40, 0));
+    }
+
+    resize();
+    listen(window, 'resize', resize);
+
+    function frame(now) {
+      if (stopped || !canvas.isConnected) return;
+      window.requestAnimationFrame(frame);
+      if (document.hidden || now - last < (boosted ? 28 : 62)) return;
+      last = now;
+
+      ctx.fillStyle = 'rgba(6, 10, 8, 0.14)';
+      ctx.fillRect(0, 0, width, height);
+      ctx.font = SIZE + 'px ui-monospace, Menlo, Consolas, monospace';
+
+      for (let i = 0; i < drops.length; i += 1) {
+        const y = drops[i] * SIZE;
+        if (y > 0) {
+          ctx.fillStyle = Math.random() < 0.04 ? '#d8ffe8' : '#19c26a';
+          ctx.fillText(CHARS[randomInt(0, CHARS.length - 1)], i * SIZE, y);
+        }
+        if (y > height && Math.random() > 0.975) drops[i] = random(-12, 0);
+        drops[i] += boosted ? 1.6 : 1;
+      }
+    }
+
+    window.requestAnimationFrame(frame);
+
+    onPage(() => {
+      stopped = true;
+      canvas.remove();
+    });
+
+    return {
+      boost() {
+        boosted = true;
+        canvas.classList.add('is-boosted');
+      }
+    };
+  }
+
   function initLock() {
     if (!pageClass('page--lock')) return;
 
@@ -1201,18 +1272,27 @@
     const form = $('#lockForm');
     const input = $('#lockInput');
     const message = $('#lockMsg');
-    const icon = $('#lockIcon');
-    const card = $('.card--lock');
+    const card = $('.vault');
+    const title = $('#main-title');
+    const progress = $('#lockProgress');
+    const button = $('#lockBtn');
     if (!form || !input) return;
 
+    const rain = startMatrixRain();
+
     const WRONG = [
-      'Hmm… ce n’est pas la bonne date 🙈 Réessaie.',
-      'Presque ! Vérifie bien le jour, le mois et l’année 💗',
-      'Ce n’est pas ça… mais je t’attends. 😊'
+      'ACCÈS REFUSÉ\nDate incorrecte.',
+      'ACCÈS REFUSÉ\nVérifiez le jour, le mois et l’année.',
+      'ACCÈS REFUSÉ\nNouvelle tentative autorisée.'
     ];
 
     let tries = 0;
     let opened = false;
+
+    function say(text, ok) {
+      message.textContent = text;
+      message.classList.toggle('is-ok', !!ok);
+    }
 
     // Masque de saisie : 30102007 → 30/10/2007
     listen(input, 'input', () => {
@@ -1235,7 +1315,7 @@
       form.classList.remove('is-shake');
       void form.offsetWidth;
       form.classList.add('is-shake');
-      message.textContent = text;
+      say(text, false);
     }
 
     listen(form, 'submit', (event) => {
@@ -1245,7 +1325,7 @@
       const digits = enteredDigits();
 
       if (!digits) {
-        wrong('Entre la date complète : jour / mois / année 🎂');
+        wrong('FORMAT INVALIDE\nAttendu : JJ/MM/AAAA');
         return;
       }
 
@@ -1259,13 +1339,21 @@
         Music.startFromGesture();
 
         input.disabled = true;
-        if (icon) icon.textContent = '🔓';
+        if (button) button.disabled = true;
         if (card) card.classList.add('is-unlocked');
-        message.textContent = 'Bienvenue… cette surprise est pour toi 💖';
-        burstHearts(30);
-        confetti(2400);
+        if (title) {
+          title.textContent = 'ACCÈS AUTORISÉ';
+          title.setAttribute('data-text', 'ACCÈS AUTORISÉ');
+        }
+        say('IDENTITÉ CONFIRMÉE ✓\nChargement en cours…', true);
+        if (progress) {
+          progress.hidden = false;
+          void progress.offsetWidth;
+          progress.classList.add('is-running');
+        }
+        rain.boost();
 
-        after(() => leaveTo('accueil.html'), prefersReducedMotion ? 250 : 1700);
+        after(() => leaveTo('accueil.html'), prefersReducedMotion ? 250 : 1750);
         return;
       }
 
@@ -2730,6 +2818,11 @@
 
   function initPage(musicSrc) {
     heartPool = HEART_EMOJIS;
+
+    const themeMeta = $('meta[name="theme-color"]');
+    if (themeMeta) {
+      themeMeta.setAttribute('content', pageClass('page--lock') ? '#060a08' : 'hsl(' + HUE + ', 100%, 65%)');
+    }
 
     personalize();
     applyReveal();

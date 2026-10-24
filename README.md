@@ -7,7 +7,12 @@
 
 ## 🔒 Page d’entrée avec mot de passe
 
-Le site s’ouvre sur `index.html` : une page **protégée par un mot de passe**.
+Le site s’ouvre sur `index.html` : une page **protégée par un mot de passe**,
+volontairement dans un **style « coffre-fort » sombre** (vert et gris, pluie de
+chiffres façon terminal, cadenas) : **aucun cœur, aucun rose**, rien ne laisse
+deviner la suite. Le titre de l’onglet, l’aperçu du lien et la couleur de la
+barre du navigateur sont eux aussi neutres (« Accès sécurisé »). La surprise
+n’apparaît qu’après la bonne date, quand la page passe au rose.
 Le mot de passe est la **date d’anniversaire** de la personne (saisie `JJ/MM/AAAA`,
 les formats `30-10-2007`, `30.10.2007` et `301007` sont aussi acceptés).
 

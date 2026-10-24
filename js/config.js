@@ -50,7 +50,7 @@ window.ROMANCE_CONFIG = {
   lock: {
     enabled: true,
     hash: 'f85d8bd31777b05f8bfcc4523e82fc5e7a374dca5562ad7fdde82d6484d6440e',
-    hint: 'Indice : c’est ta date de naissance, au format jour / mois / année 🎂'
+    hint: 'Indice : ta date de naissance, au format JJ/MM/AAAA.'
   },
 
   /* ---------- Musique de chaque page ------------------------------------- *
@@ -302,7 +302,8 @@ window.ROMANCE_CONFIG = {
 
   document.addEventListener('DOMContentLoaded', function () {
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', 'hsl(' + hue + ', 100%, 65%)');
+    var onLock = document.body && document.body.classList.contains('page--lock');
+    if (meta && !onLock) meta.setAttribute('content', 'hsl(' + hue + ', 100%, 65%)');
   });
 })();
 
