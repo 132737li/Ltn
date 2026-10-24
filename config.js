@@ -50,7 +50,7 @@ window.ROMANCE_CONFIG = {
   lock: {
     enabled: true,
     hash: 'f85d8bd31777b05f8bfcc4523e82fc5e7a374dca5562ad7fdde82d6484d6440e',
-    hint: 'Indice : c’est ta date de naissance, au format jour / mois / année 🎂'
+    hint: 'Indice : ta date de naissance, au format JJ/MM/AAAA.'
   },
 
   /* ---------- Musique de chaque page ------------------------------------- *
@@ -121,18 +121,17 @@ window.ROMANCE_CONFIG = {
     },
     {
       q: 'Quel genre de film je préfère ?',
-      options: ['Les films d’amour', 'Les films d’action', 'Les dessins animés', 'Les films d’horreur'],
+      options: ['Les films d’amour', 'Les films d’action (John Wick en tête !)', 'Les dessins animés', 'Les films d’horreur'],
       answer: 1,
-      good: 'Action,John Wick DeBabayaga. 🎬',
+      good: 'Action, et John Wick en tête. 🎬',
       bad: 'Non : j’adore l’action, surtout John Wick. 🎬'
     },
     {
       q: 'Quel artiste j’écoute le plus ?',
-      options: ['Wiz Khalifa', 'Drake','Fredz', 'Burna Boy', 'Rihanna'],
-      answer: 2,
-      good: 'Fredz,Extraordinaires 🎶',
-      good: 'Wiz Khalifa,Promises 🎶',
-      bad: 'Raté, c’est Wiz Khalifa et Fredz. 🎶'
+      options: ['Wiz Khalifa', 'Drake', 'Burna Boy', 'Rihanna'],
+      answer: 0,
+      good: 'Wiz Khalifa, et « Promise » tourne en boucle. 🎶',
+      bad: 'Raté, c’est Wiz Khalifa. Et « Promise » tourne en boucle. 🎶'
     },
     {
       q: 'Dans quel domaine je rêve de réussir ?',
@@ -157,7 +156,7 @@ window.ROMANCE_CONFIG = {
     },
     {
       q: 'Combien de fois par jour est-ce que je pense à toi ?',
-      options: ['Une fois', 'Dix fois', 'Mille fois', 'Je n’ai jamais arrêté','Ca depend'],
+      options: ['Une fois', 'Dix fois', 'Mille fois', 'Je n’ai jamais arrêté'],
       answer: 3,
       good: 'Tu me connais trop bien. 🙈',
       bad: 'Même mille, c’est trop peu : je n’ai jamais arrêté. 💘'
@@ -182,8 +181,8 @@ window.ROMANCE_CONFIG = {
    *  - email    : ton adresse e-mail                                          *
    * Si les deux sont vides, le menu « Partager » du téléphone s'ouvre.        */
   contact: {
-    whatsapp: '',
-    email: ''
+    whatsapp: '25776672387',
+    email: 'lirakoze602@gmail.com'
   },
 
   /* ---------- Page 8 : les 100 raisons ----------------------------------- */
@@ -303,7 +302,8 @@ window.ROMANCE_CONFIG = {
 
   document.addEventListener('DOMContentLoaded', function () {
     var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', 'hsl(' + hue + ', 100%, 65%)');
+    var onLock = document.body && document.body.classList.contains('page--lock');
+    if (meta && !onLock) meta.setAttribute('content', 'hsl(' + hue + ', 100%, 65%)');
   });
 })();
 
