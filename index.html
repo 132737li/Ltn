@@ -5,8 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#ff4f9a" />
-  <meta name="description" content="Un petit message tout doux… juste pour toi." />
-  <title>Pour toi…</title>
+  <meta name="description" content="Une surprise protégée, rien que pour toi." />
+  <title>Une surprise pour toi 🔒</title>
 
   <link rel="icon"
     href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💗</text></svg>" />
@@ -20,7 +20,7 @@
   <script src="js/config.js"></script>
 </head>
 
-<body class="page page--home" data-page="index" data-step="1" data-steps="11" data-fx="petals">
+<body class="page page--lock" data-page="lock" data-fx="stars,petals">
 
   <audio id="pageMusic" src="assets/musique.mp3" loop preload="auto"></audio>
   <button type="button" class="music-toggle" id="musicToggle" aria-pressed="false"
@@ -35,33 +35,25 @@
   <div class="hearts-layer" id="heartsLayer" aria-hidden="true"></div>
 
   <main class="stage">
-    <section class="card" aria-labelledby="main-title">
+    <section class="card card--lock" aria-labelledby="main-title">
 
-      <div class="emblem" aria-hidden="true">
-        <span class="emblem__ring"></span>
-        <span class="emblem__ring emblem__ring--2"></span>
-        <span class="emblem__heart">💗</span>
-      </div>
+      <div class="lock-emblem" id="lockIcon" aria-hidden="true">🔒</div>
 
-      <span class="badge">Pour toi seule ✨</span>
+      <span class="badge">Chut… c’est un secret 🤫</span>
 
-      <h1 class="title" id="main-title" data-tpl="Salut, {name}…" data-fallback="belle âme">Salut, belle âme…</h1>
+      <h1 class="title" id="main-title">Cette surprise est protégée</h1>
 
-      <p class="lead">J’avais envie de t’écrire quelque chose de vrai.</p>
+      <p class="lead">Quelqu’un a préparé quelque chose pour toi.</p>
 
-      <div class="joke">
-        <p class="reveal">Chaque fois que tu croises mon esprit, le monde devient un peu plus doux.</p>
-        <p class="reveal">Ton sourire a ce pouvoir étrange… il me fait perdre le fil, et je m’en fiche.</p>
-        <p class="punchline reveal">Alors j’ai décidé de tout te dire, sans détour. 💕</p>
-      </div>
+      <form class="lock-form" id="lockForm" autocomplete="off" novalidate>
+        <label class="lock-label" for="lockInput">Entrez votre date de naissance pour entrer</label>
+        <input id="lockInput" class="lock-input" type="text" inputmode="numeric"
+          autocomplete="off" autocapitalize="off" spellcheck="false"
+          placeholder="JJ/MM/AAAA" maxlength="10" aria-describedby="lockMsg" />
+        <button type="submit" class="btn btn--primary btn--pulse" id="lockBtn">Ouvrir 💗</button>
+      </form>
 
-      <p class="lead lead--strong reveal">
-        Prépare ton cœur… la suite est juste pour toi.
-      </p>
-
-      <div class="actions reveal">
-        <a class="btn btn--primary btn--pulse" href="page2.html">Continuer 💗</a>
-      </div>
+      <p class="lock-msg" id="lockMsg" role="status" aria-live="polite"></p>
 
     </section>
   </main>

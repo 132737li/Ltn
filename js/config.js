@@ -31,10 +31,33 @@ window.ROMANCE_CONFIG = {
   // Recommandé : il garantit que la musique démarre partout (iPhone compris).
   startScreen: true,
 
+  /* ---------- Page du mot de passe (toute première page) ------------------ *
+   * enabled : true  = le site s'ouvre sur la page du mot de passe.            *
+   * hash    : l'EMPREINTE du mot de passe (pas le mot de passe lui-même,      *
+   *           pour qu'on ne le lise pas directement dans le code).            *
+   * hint    : indice affiché après 3 essais ratés.                            *
+   *                                                                           *
+   * Mot de passe actuel : sa date d'anniversaire.                             *
+   *                                                                           *
+   * ➜ Pour CHANGER le mot de passe :                                          *
+   *   1. ouvre le site, appuie sur F12, onglet « Console »                    *
+   *   2. tape  romanceHash('JJMMAAAA')  (ex. romanceHash('30102007')) + Entrée *
+   *   3. copie le long texte obtenu à la place de « hash » ci-dessous         *
+   *                                                                           *
+   * ⚠️ Sur un site gratuit sans serveur, ce mot de passe est un jeu           *
+   *    romantique, pas un coffre-fort : quelqu'un de très technique pourrait  *
+   *    le contourner. N'y mets jamais un vrai mot de passe (banque, mail…).    */
+  lock: {
+    enabled: true,
+    hash: 'f85d8bd31777b05f8bfcc4523e82fc5e7a374dca5562ad7fdde82d6484d6440e',
+    hint: 'Indice : c’est ta date de naissance, au format jour / mois / année 🎂'
+  },
+
   /* ---------- Musique de chaque page ------------------------------------- *
    * Les fichiers sont dans le dossier assets/. Tu peux en ajouter d'autres.   */
   music: {
-    index:      'musique.mp3',
+    lock:       'musique.mp3',
+    accueil:    'musique.mp3',
     confession: 'musique2.mp3',
     reasons:    'musique1.mp3',
     letter:     'musique3.mp3',
@@ -73,29 +96,63 @@ window.ROMANCE_CONFIG = {
   /* ---------- Page 6 : le quiz « À quel point tu me connais ? » ----------- *
    * answer = numéro de la bonne réponse (0 = la première).                    *
    * Mets answer: null pour une question sans mauvaise réponse.                *
-   * 💡 Remplace ces questions par de VRAIES questions sur toi (plat préféré,  *
-   *    film, couleur, rêve…) : c'est ça qui rendra le quiz inoubliable.       */
+   * Pour changer une question : modifie q, options, answer, good et bad.      */
   quiz: [
     {
-      q: 'Quelle est la première chose que j’ai remarquée chez toi ?',
-      options: ['Ton sourire', 'Ton regard', 'Ta voix', 'Tout à la fois'],
-      answer: 3,
-      good: 'Exactement… impossible de choisir. 💖',
-      bad: 'Presque ! En vérité, c’était tout à la fois. 😳'
-    },
-    {
-      q: 'Que fais-je quand je pense à toi ?',
-      options: ['Je souris tout seul', 'Je dors', 'Je mange', 'Je range ma chambre'],
-      answer: 0,
-      good: 'Oui… et les gens se demandent pourquoi. 😊',
-      bad: 'Raté ! Je souris tout seul, comme un idiot heureux. 🥹'
-    },
-    {
-      q: 'Quel est mon plus grand rêve en ce moment ?',
-      options: ['Devenir milliardaire', 'Voir ton sourire chaque jour', 'Dormir jusqu’à midi', 'Gagner au loto'],
+      q: 'Quel est mon plat préféré ?',
+      options: ['Pizza', 'Riz, haricots et frites', 'Spaghettis', 'Poulet braisé'],
       answer: 1,
-      good: 'Bien joué. Le reste peut attendre. ✨',
-      bad: 'Non… mon plus grand rêve, c’est ton sourire. 💕'
+      good: 'Riz, haricots et frites… le vrai festin ! 😋',
+      bad: 'Raté ! Rien ne bat le riz, les haricots et les frites. 😋'
+    },
+    {
+      q: 'Quelles sont mes couleurs préférées ?',
+      options: ['Rouge et noir', 'Rose et blanc', 'Vert et gris', 'Bleu et jaune'],
+      answer: 2,
+      good: 'Vert et gris, toujours. 💚🩶',
+      bad: 'Non, c’est vert et gris. 💚🩶'
+    },
+    {
+      q: 'Quelle est ma boisson préférée ?',
+      options: ['Un jus de mangue', 'Un café bien chaud', 'Du lait chaud', 'Une Amstel Bright'],
+      answer: 3,
+      good: 'Une Amstel Bright, bien fraîche. 🍺',
+      bad: 'Raté, c’est l’Amstel Bright ! 🍺'
+    },
+    {
+      q: 'Quel genre de film je préfère ?',
+      options: ['Les films d’amour', 'Les films d’action (John Wick en tête !)', 'Les dessins animés', 'Les films d’horreur'],
+      answer: 1,
+      good: 'Action, et John Wick en tête. 🎬',
+      bad: 'Non : j’adore l’action, surtout John Wick. 🎬'
+    },
+    {
+      q: 'Quel artiste j’écoute le plus ?',
+      options: ['Wiz Khalifa', 'Drake', 'Burna Boy', 'Rihanna'],
+      answer: 0,
+      good: 'Wiz Khalifa, et « Promise » tourne en boucle. 🎶',
+      bad: 'Raté, c’est Wiz Khalifa. Et « Promise » tourne en boucle. 🎶'
+    },
+    {
+      q: 'Dans quel domaine je rêve de réussir ?',
+      options: ['La médecine', 'Le football', 'La cuisine', 'L’informatique'],
+      answer: 3,
+      good: 'L’informatique : je veux devenir celui que je rêve d’être. 💻',
+      bad: 'Non, mon domaine, c’est l’informatique. Et j’y arriverai. 💻'
+    },
+    {
+      q: 'Que fais-je pour me ressourcer ?',
+      options: ['Je fais la fête', 'Je médite, seul, au calme', 'Je joue avec tout le monde', 'Je regarde la télé toute la nuit'],
+      answer: 1,
+      good: 'La méditation, au calme. Je préfère peu de monde. 🧘',
+      bad: 'Non, je médite seul, au calme. Les grandes foules, très peu pour moi. 🧘'
+    },
+    {
+      q: 'À qui est-ce que je dis tout, comme à un jumeau ?',
+      options: ['À tout le monde', 'À personne', 'Aux personnes en qui j’ai confiance', 'Aux inconnus'],
+      answer: 2,
+      good: 'Oui : quand je fais confiance, je dis tout. 🤝',
+      bad: 'Non : seulement aux personnes en qui j’ai vraiment confiance. 🤝'
     },
     {
       q: 'Combien de fois par jour est-ce que je pense à toi ?',
@@ -103,13 +160,6 @@ window.ROMANCE_CONFIG = {
       answer: 3,
       good: 'Tu me connais trop bien. 🙈',
       bad: 'Même mille, c’est trop peu : je n’ai jamais arrêté. 💘'
-    },
-    {
-      q: 'Que serais-je prêt à faire pour te voir sourire ?',
-      options: ['Presque tout', 'Rien du tout', 'Je ne sais pas', 'Tout. Absolument tout.'],
-      answer: 3,
-      good: 'Tu as vu juste. Et je ne plaisante pas. 💗',
-      bad: 'Non, la bonne réponse : tout. Absolument tout. 🥰'
     }
   ],
 
@@ -254,4 +304,24 @@ window.ROMANCE_CONFIG = {
     var meta = document.querySelector('meta[name="theme-color"]');
     if (meta) meta.setAttribute('content', 'hsl(' + hue + ', 100%, 65%)');
   });
+})();
+
+/* --------------------------------------------------------------------------
+   Protection d'accès (ne pas modifier)
+   Une page intérieure ouverte directement renvoie vers la page du mot de passe.
+   -------------------------------------------------------------------------- */
+(function () {
+  var lock = window.ROMANCE_CONFIG.lock;
+  var last = window.location.pathname.split('/').pop();
+  var isLockPage = last === '' || last === 'index.html';
+
+  if (!lock || !lock.enabled) {
+    if (isLockPage) window.location.replace('accueil.html');
+    return;
+  }
+
+  var unlocked = false;
+  try { unlocked = window.sessionStorage.getItem('romanceUnlocked') === 'true'; } catch (e) {}
+
+  if (!isLockPage && !unlocked) window.location.replace('index.html');
 })();

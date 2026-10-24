@@ -5,11 +5,34 @@
 
 ---
 
-## ✨ Parcours (11 pages)
+## 🔒 Page d’entrée avec mot de passe
+
+Le site s’ouvre sur `index.html` : une page **protégée par un mot de passe**.
+Le mot de passe est la **date d’anniversaire** de la personne (saisie `JJ/MM/AAAA`,
+les formats `30-10-2007`, `30.10.2007` et `301007` sont aussi acceptés).
+
+- Mauvaise date → petit tremblement + message doux ; après 3 essais, un **indice** s’affiche.
+- Bonne date → le cadenas s’ouvre 🔓, cœurs et confettis, puis l’accueil.
+- Les autres pages ne s’ouvrent pas en lien direct sans avoir saisi la date.
+- La saisie sert aussi de « geste » qui **débloque la musique** (iPhone compris).
+- Le mot de passe n’est **pas écrit en clair** dans le code, seulement son empreinte (`lock.hash`).
+
+> ⚠️ Sur un site gratuit sans serveur, c’est un **jeu romantique, pas un coffre-fort** :
+> quelqu’un de très technique pourrait le contourner (la date d’anniversaire est
+> d’ailleurs facile à deviner). N’y mets jamais un vrai mot de passe.
+
+**Changer le mot de passe** : ouvre le site, `F12` → onglet *Console*, tape
+`romanceHash('JJMMAAAA')` puis Entrée, et copie le résultat dans `lock.hash`
+de `js/config.js`. Pour **supprimer** le mot de passe : `lock.enabled: false`.
+
+---
+
+## ✨ Parcours (11 pages + l’entrée)
 
 | # | Page | Ce qu’il s’y passe |
 |---|------|--------------------|
-| 1 | `index.html` | Écran **« Touche pour commencer »**, puis accueil tendre avec cœur qui bat |
+| 0 | `index.html` | **Mot de passe** (date d’anniversaire) |
+| 1 | `accueil.html` | Accueil tendre avec cœur qui bat |
 | 2 | `page2.html` | Confession + **Oui** / **Non** (le Non s’enfuit) |
 | 3 | `page3.html` | **6 cartes à retourner** : « ce que j’aime chez toi » |
 | 4 | `page4.html` | **Enveloppe à ouvrir** + lettre qui s’écrit à la machine |
@@ -97,7 +120,7 @@ Les animations sont réduites automatiquement si l’appareil est réglé sur
 
 ## 🚀 Lancer
 
-Ouvre `index.html` dans un navigateur (Chrome, Firefox, Safari, Edge).
+Ouvre `index.html` (page du mot de passe) dans un navigateur (Chrome, Firefox, Safari, Edge).
 Pour la meilleure expérience (navigation fluide + musique continue), passe par un
 petit serveur local ou héberge le site (GitHub Pages…) :
 
@@ -111,7 +134,8 @@ python -m http.server 8000
 ## 🗂️ Structure
 
 ```
-index.html … page11.html   les 11 pages
+index.html                la page du mot de passe
+accueil.html … page11.html   les 11 pages du parcours
 css/style.css              styles (toute la palette dépend de --hue)
 js/config.js               ✍️ personnalisation (à modifier)
 js/script.js               moteur du site
