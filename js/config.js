@@ -38,7 +38,7 @@ window.ROMANCE_CONFIG = {
    * hint    : indice affiché après 3 essais ratés.                            *
    *                                                                           *
    * Mot de passe actuel : sa date d'anniversaire.                             *
-   *                                                                           *
+   *                                                                          *
    * ➜ Pour CHANGER le mot de passe :                                          *
    *   1. ouvre le site, appuie sur F12, onglet « Console »                    *
    *   2. tape  romanceHash('JJMMAAAA')  (ex. romanceHash('30102007')) + Entrée *
@@ -48,8 +48,8 @@ window.ROMANCE_CONFIG = {
    *    romantique, pas un coffre-fort : quelqu'un de très technique pourrait  *
    *    le contourner. N'y mets jamais un vrai mot de passe (banque, mail…).    */
   lock: {
-    Enabled: trUe,
-    hash: 'F85d8bd31777b05f8bfcc4523e82fc5e7a374dca5562ad7fdde82d6484d6440e',
+   enabled: true,
+    hash: 'f85d8bd31777b05f8bfcc4523e82fc5e7a374dca5562ad7fdde82d6484d6440e',
     hint: 'Indice : ta date de naissance, au format JJ/MM/AAAA.'
   },
 
