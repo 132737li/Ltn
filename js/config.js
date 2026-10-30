@@ -49,7 +49,7 @@ window.ROMANCE_CONFIG = {
    *    le contourner. N'y mets jamais un vrai mot de passe (banque, mail…).    */
   lock: {
     enabled: true,
-    hash: 'f85d8bd31777b05f8bfcc4523e82fc5e7a374dca5562ad7fdde82d6484d6440e',
+    hash: 'F85d8bd31777b05f8bfcc4523e82fc5e7a374dca5562ad7fdde82d6484d6440e',
     hint: 'Indice : ta date de naissance, au format JJ/MM/AAAA.'
   },
 
